@@ -1,3 +1,7 @@
+import {
+    inventario
+} from "./juego.js"
+
 export class criatura {
     constructor(nombre, vida, vidaMaxima, ataque){
         if(new.target === criatura){
@@ -14,17 +18,23 @@ export class criatura {
 
 
 
-class Heroe extends criatura {
+export class Heroe extends criatura {
     constructor(nombre, vida, vidaMaxima, ataque){
         super(nombre, vida, vidaMaxima, ataque)
+        //9
+        this.inventario = new inventario()
     }
 }
-class Monstruo extends criatura {
+export class Monstruo extends criatura {
     constructor(nombre, vida, vidaMaxima, ataque){
         if(new.target === criatura){
             throw new Error("No se puede instanciar una clase abstracta")
         }
         super(nombre, vida, vidaMaxima, ataque)
+    }
+    atacar(heroe){
+        heroe.vida -= this.ataque;
+        if(objetivo.vida < 0) objetivo.vida = 0;
     }
 }
 
