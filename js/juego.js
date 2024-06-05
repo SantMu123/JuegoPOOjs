@@ -1,4 +1,4 @@
-import {Orco, Goblin, Kobold} from "./criatura.js";
+import {Orco, Goblin, Kobold, Heroe} from "./criatura.js";
 
 export class juego {
     constructor(heroe){
@@ -18,12 +18,19 @@ export class juego {
             return;
         }
         const prob = Math.random();
+        //13
         if(prob < 0.5){
             const monstruos = [new Orco(), new Goblin(), new Kobold()];
-            rand = Math.random()
+            const rand = Math.random()
             this.monstruo = monstruos[rand * monstruos.length]
             this.loguear(`¡Un ${this.monstruo.nombre} aparece!`)
-        } 
+        }
+        else{
+            const pocion = new Item("Poción de vida", 20);
+            this.heroe.inventario.agregarItem(pocion);
+            this.loguear("¡Encontraste una poción de vida!");
+        }
+        // 
     }
     atacar (){
         if(!this.monstruo || this.monstruo.vida <= 0){
@@ -53,6 +60,7 @@ export class juego {
                 break;
         }
     }
+    //12
     utilizarItem(itemNombre) {
         const item = this.heroe.inventario.obtenerItem(itemNombre);
         if (item) {
@@ -97,7 +105,7 @@ class combate {
     }
 }
  //10
-class Item {
+export class Item {
     constructor(nombre, vida) {
         this.nombre = nombre;
         this.vida = vida;
@@ -133,3 +141,4 @@ export class Inventario {
         return this.items.map(item => item.nombre).join(", ");
     }
 }
+

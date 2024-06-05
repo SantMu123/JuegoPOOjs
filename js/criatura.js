@@ -1,5 +1,5 @@
 import {
-    inventario
+    Inventario
 } from "./juego.js"
 
 export class criatura {
@@ -22,9 +22,17 @@ export class Heroe extends criatura {
     constructor(nombre, vida, vidaMaxima, ataque){
         super(nombre, vida, vidaMaxima, ataque)
         //9
-        this.inventario = new inventario()
+        this.inventario = new Inventario()
     }
 }
+
+//12
+
+Heroe.prototype.utilizarItem = function(item) {
+    item.utilizar(this);
+    this.inventario.eliminarItem(item.nombre);
+};
+
 export class Monstruo extends criatura {
     constructor(nombre, vida, vidaMaxima, ataque){
         if(new.target === criatura){
